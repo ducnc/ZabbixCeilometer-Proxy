@@ -30,7 +30,7 @@ Assuming that all the above requirements are met, the ZCP can be run with 3 simp
 
 1. On your OpenStack installation point to your Keystone configuration file (keystone.conf) and uncomment the following line:
 
-		notification_driver = keystone.openstack.common.notifier.rpc_notifier
+		notification_driver = messaging
 
 2. Edit the `proxy.conf` configuration file to reflect your own system, including the IP addresses and ports of Zabbix and of the used OpenStack modules (RabbitMQ, Ceilometer Keystone and Nova). You can also tweak some ZCP internal configurations such as the polling interval, template name and proxy name (used in Zabbix).
 

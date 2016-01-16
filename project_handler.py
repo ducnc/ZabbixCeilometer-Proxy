@@ -39,8 +39,7 @@ class ProjectEvents:
         result = channel.queue_declare(exclusive=True)
         queue_name = result.method.queue
         channel.exchange_declare(exchange='keystone', type='topic')
-        channel.queue_bind(exchange='openstack', queue=queue_name, routing_key='notifications.#')
-        channel.queue_bind(exchange='keystone', queue=queue_name, routing_key='keystone.#')
+        channel.queue_bind(exchange='keystone', queue=queue_name, routing_key='notifications.info')
         channel.basic_consume(self.keystone_callback, queue=queue_name, no_ack=True)
         channel.start_consuming()
 
@@ -54,6 +53,7 @@ class ProjectEvents:
         :param body: refers to the message transmitted
         """
         payload = json.loads(body)
+        tenant_name = []
 
         if payload['event_type'] == 'identity.project.created':
             print "New project created - Host group created"
